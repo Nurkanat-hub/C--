@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Closest to 100</title>
+</head>
+<body>
+  <h1>Closest and Farthest from 100</h1>
+  
+  <p>Values: a = 10, b = 25, c = 99</p>
+  <p id="closest"></p>
+  <p id="farthest"></p>
+  
+  <script>
+    const a = 10;
+    const b = 25;
+    const c = 99;
+
+    const closestTo100 = (x, y, z) => {
+      const distances = [Math.abs(100 - x), Math.abs(100 - y), Math.abs(100 - z)];
+      const minDistance = Math.min(...distances);
+      const maxDistance = Math.max(...distances);
+      
+      let closest, farthest;
+      if (minDistance === distances[0]) closest = x;
+      else if (minDistance === distances[1]) closest = y;
+      else closest = z;
+      
+      if (maxDistance === distances[0]) farthest = x;
+      else if (maxDistance === distances[1]) farthest = y;
+      else farthest = z;
+      
+      return { closest, farthest };
+    };
+
+    const result = closestTo100(a, b, c);
+
+    document.getElementById("closest").textContent = `Closest to 100: ${result.closest}`;
+    document.getElementById("farthest").textContent = `Farthest from 100: ${result.farthest}`;
+  </script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #1e1e1e; /* Dark background */
+            color: #ffffff; /* White text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .clock-container {
+            background-color: #2c2c2c; /* Slightly lighter background for the clock */
+            border-radius: 20px; /* Rounded corners */
+            padding: 40px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.7); /* Shadow effect */
+            text-align: center;
+        }
+
+        .clock {
+            font-size: 80px; /* Large font size for the clock */
+            letter-spacing: 2px; /* Space between letters */
+        }
+
+        .date {
+            font-size: 24px; /* Smaller font size for the date */
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="clock-container">
+        <div class="clock" id="clock"></div>
+        <div class="date" id="date"></div>
+    </div>
+
+    <script>
+        function updateClock() {
+            const now = new Date(); // Get the current date and time
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options); // Format the date
+            const hours = String(now.getHours()).padStart(2, '0'); // Get hours and format
+            const minutes = String(now.getMinutes()).padStart(2, '0'); // Get minutes and format
+            const seconds = String(now.getSeconds()).padStart(2, '0'); // Get seconds and format
+
+            // Create a time string in HH:MM:SS format
+            const timeString = `${hours}:${minutes}:${seconds}`;
+            document.getElementById('clock').textContent = timeString; // Update clock display
+            document.getElementById('date').textContent = formattedDate; // Update date display
+        }
+
+        // Update the clock every second
+        setInterval(updateClock, 1000);
+        updateClock(); // Initial call to display the clock immediately
+    </script>
+</body>
+</html>

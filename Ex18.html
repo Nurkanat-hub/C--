@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop Example</title>
+    <style>
+        /* Basic styling for the body */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f3f4f6;
+        }
+
+        /* Container styling */
+        .container {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* Drag container styling */
+        .drag-container, .drop-container {
+            width: 200px;
+            height: 300px;
+            background-color: #ffffff;
+            border: 2px dashed #4e54c8;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        /* Heading styling for containers */
+        .container-header {
+            font-weight: bold;
+            color: #4e54c8;
+            margin-bottom: 10px;
+        }
+
+        /* Draggable item styling */
+        .draggable {
+            width: 150px;
+            padding: 10px;
+            background-color: #6c6eff;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            cursor: grab;
+            transition: transform 0.2s;
+        }
+
+        /* Dragging effect */
+        .draggable:active {
+            cursor: grabbing;
+            transform: scale(1.1);
+        }
+
+        /* Highlight effect for drop target */
+        .drop-container.hovered {
+            background-color: #ececff;
+            border-color: #6c6eff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- Draggable items container -->
+    <div class="drag-container">
+        <div class="container-header">Items</div>
+        <div class="draggable" draggable="true">Item 1</div>
+        <div class="draggable" draggable="true">Item 2</div>
+        <div class="draggable" draggable="true">Item 3</div>
+        <div class="draggable" draggable="true">Item 4</div>
+    </div>
+
+    <!-- Drop target container -->
+    <div class="drop-container" id="dropZone">
+        <div class="container-header">Drop Here</div>
+    </div>
+</div>
+
+<script>
+    // Select all draggable items and the drop container
+    const draggables = document.querySelectorAll(".draggable");
+    const dropZone = document.getElementById("dropZone");
+
+    // Loop through each draggable item and add event listeners
+    draggables.forEach(draggable => {
+        draggable.addEventListener("dragstart", dragStart);
+        draggable.addEventListener("dragend", dragEnd);
+    });
+
+    // Add event listeners for the drop zone
+    dropZone.addEventListener("dragover", dragOver);
+    dropZone.addEventListener("dragenter", dragEnter);
+    dropZone.addEventListener("dragleave", dragLeave);
+    dropZone.addEventListener("drop", dragDrop);
+
+    // Store the item being dragged
+    let draggedItem = null;
+
+    // Function that handles the start of a drag
+    function dragStart(event) {
+        draggedItem = event.target;
+        setTimeout(() => {
+            event.target.style.display = "none"; // Hide the item being dragged temporarily
+        }, 0);
+    }
+
+    // Function that handles the end of a drag
+    function dragEnd(event) {
+        setTimeout(() => {
+            draggedItem.style.display = "block"; // Show the item again
+            draggedItem = null; // Reset the dragged item
+        }, 0);
+    }
+
+    // Function that allows dragging over the drop zone
+    function dragOver(event) {
+        event.preventDefault(); // Prevent default to allow drop
+    }
+
+    // Function when entering the drop zone
+    function dragEnter(event) {
+        event.preventDefault();
+        dropZone.classList.add("hovered"); // Add a highlight effect
+    }
+
+    // Function when leaving the drop zone
+    function dragLeave(event) {
+        dropZone.classList.remove("hovered"); // Remove the highlight effect
+    }
+
+    // Function that handles dropping the item
+    function dragDrop(event) {
+        event.preventDefault();
+        dropZone.classList.remove("hovered"); // Remove the highlight effect
+        if (draggedItem) {
+            dropZone.appendChild(draggedItem); // Append the dragged item to the drop zone
+        }
+    }
+</script>
+
+</body>
+</html>

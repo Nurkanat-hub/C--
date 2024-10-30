@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Split Sentences to New Lines</title>
+</head>
+<body>
+  <h1>Separate Sentences onto New Lines</h1>
+  
+  <p id="text">
+    JavaScript is a versatile language. It can be used for web development, server-side programming, and even mobile apps! Do you want to learn more about JavaScript? Let's get started.
+  </p>
+  
+  <button onclick="splitSentences()">Split Sentences</button>
+  
+  <script>
+    function splitSentences() {
+      const paragraph = document.getElementById("text");
+      
+      // Split text based on sentence-ending punctuation
+      const sentences = paragraph.textContent.split(/(?<=[.?!])\s+/);
+      
+      // Join sentences with line breaks
+      paragraph.innerHTML = sentences.join("<br>");
+    }
+  </script>
+</body>
+</html>

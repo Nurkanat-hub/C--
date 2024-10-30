@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlight Words in Input Paragraph</title>
+  <style>
+    .italic {
+      font-style: italic;
+    }
+    .underline {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>Highlight Words in Your Paragraph</h1>
+  
+  <label for="paragraphInput">Enter a paragraph:</label><br>
+  <textarea id="paragraphInput" rows="4" cols="50" placeholder="Type your paragraph here..."></textarea><br>
+  <button onclick="highlightWords()">Highlight Words</button>
+  
+  <h2>Highlighted Paragraph:</h2>
+  <p id="highlightedText"></p>
+  
+  <script>
+    function highlightWords() {
+      const paragraph = document.getElementById("paragraphInput").value;
+      const words = paragraph.split(" ");
+      
+      const highlightedWords = words.map(word => {
+        // Remove punctuation for accurate checking
+        const cleanWord = word.replace(/[.,!?]/g, "");
+        
+        if (cleanWord.startsWith("a") || cleanWord.startsWith("A")) {
+          return `<span class="italic">${word}</span>`;
+        } else if (cleanWord.endsWith("y")) {
+          return `<span class="underline">${word}</span>`;
+        } else {
+          return word;
+        }
+      });
+      
+      // Join highlighted words into a single string and set it to the paragraph
+      document.getElementById("highlightedText").innerHTML = highlightedWords.join(" ");
+    }
+  </script>
+</body>
+</html>

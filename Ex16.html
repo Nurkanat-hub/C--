@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stylish Sliding Sidebar</title>
+    <style>
+        /* Basic body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+            transition: background-color 0.3s;
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: linear-gradient(135deg, #4e54c8, #8f94fb);
+            overflow-x: hidden;
+            transition: width 0.4s ease;
+            padding-top: 60px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+            color: white;
+        }
+
+        /* Sidebar links */
+        .sidebar a {
+            padding: 15px 25px;
+            text-decoration: none;
+            font-size: 20px;
+            color: white;
+            display: block;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+
+        /* Hover effect for links */
+        .sidebar a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Main content */
+        .main-content {
+            transition: margin-left 0.4s ease;
+            padding: 20px;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+        }
+
+        /* Open sidebar button */
+        #openSidebar {
+            font-size: 24px;
+            cursor: pointer;
+            color: #4e54c8;
+            padding: 15px;
+            display: inline-block;
+        }
+
+        /* Close button styling */
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Open Sidebar Button -->
+<div id="openSidebar" onclick="openSidebar()">☰ Open Menu</div>
+
+<!-- Sidebar -->
+<div id="mySidebar" class="sidebar">
+    <span class="close-btn" onclick="closeSidebar()">&times;</span>
+    <a href="#">About</a>
+    <a href="#">Services</a>
+    <a href="#">Products</a>
+    <a href="#">Clients</a>
+    <a href="#">Contact</a>
+</div>
+
+<!-- Main Content -->
+<div class="main-content" id="mainContent">
+    <h2>Main Content</h2>
+    <p>This is the main content area. When the sidebar opens, it will push this content to the right.</p>
+</div>
+
+<script>
+    function openSidebar() {
+        document.getElementById("mySidebar").style.width = "300px";
+        document.getElementById("mainContent").style.marginLeft = "300px";
+        document.body.style.backgroundColor = "rgba(0, 0, 0, 0.2)";
+    }
+
+    function closeSidebar() {
+        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("mainContent").style.marginLeft = "0";
+        document.body.style.backgroundColor = "#f0f0f0";
+    }
+</script>
+
+</body>
+</html>

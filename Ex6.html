@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Highlight Words</title>
+  <style>
+    .blue-background {
+      background-color: blue;
+      color: white;
+    }
+    .bold-text {
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Highlight Specific Words in Paragraph</h1>
+  
+  <p id="text">
+    This is an example paragraph where some words are longer than seven characters 
+    and others are quite short. Adjust the styles as needed for practice.
+  </p>
+  
+  <script>
+    function highlightWords() {
+      const paragraph = document.getElementById("text");
+      const words = paragraph.textContent.split(" ");
+      
+      const highlightedWords = words.map(word => {
+        if (word.length > 7) {
+          return `<span class="blue-background">${word}</span>`;
+        } else if (word.length < 3) {
+          return `<span class="bold-text">${word}</span>`;
+        } else {
+          return word;
+        }
+      });
+      
+      paragraph.innerHTML = highlightedWords.join(" ");
+    }
+
+    highlightWords();
+  </script>
+</body>
+</html>

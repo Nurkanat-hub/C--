@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Replace Characters</title>
+</head>
+<body>
+  <h1>Replace Each Character with the Next Character in Alphabet</h1>
+  
+  <label for="inputString">Enter a string:</label>
+  <input type="text" id="inputString" placeholder="Type your string here...">
+  <button onclick="replaceCharacters()">Replace Characters</button>
+  
+  <script>
+    function replaceCharacters() {
+      const str = document.getElementById("inputString").value;
+      const replacedStr = str
+        .split("")
+        .map(char => {
+          if (char.match(/[a-zA-Z]/)) {
+            return String.fromCharCode(char.charCodeAt(0) + 1);
+          } else {
+            return char; // Non-alphabet characters remain the same
+          }
+        })
+        .join("");
+      
+      alert(`Replaced string: ${replacedStr}`);
+    }
+  </script>
+</body>
+</html>
